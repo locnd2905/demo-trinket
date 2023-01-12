@@ -7,16 +7,10 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [idFrame, setIdFrame] = useState(null);
-  const postData = async (body) => {
-   try {
-     return await axios.post('https://trinket.io/api/trinkets?library=true', body )
-   } catch (error) {
-    return null
-   }
-  }
-  useEffect(() => {
-    const body = {
-      name: '', code: `import matplotlib.pyplot as plt
+  const postData = async () => {
+    try {
+      var bodyFormData = new FormData();
+      bodyFormData.append('code', `import matplotlib.pyplot as plt
 fig, ax = plt.subplots()
 
 fruits = ['apple', 'blueberry', 'cherry', 'orange']
@@ -30,10 +24,18 @@ ax.set_ylabel('fruit supply')
 ax.set_title('Fruit supply by kind and color')
 ax.legend(title='Fruit color')
 
-plt.show()`, lang: 'pygame'
-    };
-
-    let { data } = postData(body)
+plt.show()`);
+      bodyFormData.append('name', '');
+      bodyFormData.append('lang', 'pygame');
+      return await axios.post('https://trinket.io/api/trinkets?library=true', bodyFormData,
+         { "Content-Type": "multipart/form-data" },
+ )
+   } catch (error) {
+    return null
+   }
+  }
+  useEffect(() => {
+    let { data } = postData()
     setIdFrame(data)
   }, []);
 
