@@ -9,7 +9,7 @@ function App() {
   const [idFrame, setIdFrame] = useState(null);
   const postData = async (body) => {
    try {
-     return await axios.post('https://trinket.io/api/trinkets?library=true', body, headers )
+     return await axios.post('https://trinket.io/api/trinkets?library=true', body )
    } catch (error) {
     return null
    }
