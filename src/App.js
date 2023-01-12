@@ -28,7 +28,7 @@ plt.show()`);
       bodyFormData.append('name', '');
       bodyFormData.append('lang', 'pygame');
       return await axios.post('https://trinket.io/api/trinkets?library=true', bodyFormData,
-         { "Content-Type": "multipart/form-data" },
+        { headers: { 'Content-Type': 'multipart/form-data' } }
  )
    } catch (error) {
     return null
