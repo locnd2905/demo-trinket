@@ -28,7 +28,10 @@ plt.show()`);
       bodyFormData.append('name', '');
       bodyFormData.append('lang', 'pygame');
       return await axios.post('https://trinket.io/api/trinkets?library=true', bodyFormData,
-        { headers: { 'Content-Type': 'multipart/form-data' } }
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data', 'Access-Control-Allow-Origin': '*',
+ } }
  )
    } catch (error) {
     return null
@@ -36,7 +39,7 @@ plt.show()`);
   }
   useEffect(() => {
     let { data } = postData()
-    setIdFrame(data)
+    setIdFrame(data?.id)
   }, []);
 
   return (
